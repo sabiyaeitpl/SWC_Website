@@ -1,6 +1,6 @@
 <?php
    include 'layout/head.php';
-   $title = 'Our Project';
+   $title = 'Our Services';
    $table = 'ourproject';
    $manage_page = 'manage_ourproject.php';
    if(isset($_GET['type']) && $_GET['type']!=''){

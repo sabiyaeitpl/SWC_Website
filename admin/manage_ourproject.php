@@ -2,11 +2,12 @@
 
    include 'layout/head.php';
    $table = 'ourproject';
-   $section_title = 'Our Project';
+   $section_title = 'Our Services';
    $title = 'Manage '.$section_title;
    $breadcumb_title = 'Add '.$section_title;
    
     $heading='';
+    $content='';
     $image='';
     $msg='';
 
@@ -19,6 +20,7 @@
         if($check>0){
             $row=mysqli_fetch_assoc($res);
             $heading=$row['heading'];
+            $content=$row['content'];
             $image=$row['image'];
         }else{
             //header('location:banner.php');
@@ -34,6 +36,7 @@
     }
     if(isset($_POST['submit'])){
         $heading=get_safe_value($con,$_POST['heading']);
+        $content=get_safe_value($con,$_POST['content']);
         $image=get_safe_value($con,$_POST['image']);
         if(isset($_GET['id']) && $_GET['id']==0){
             if($_FILES['image']['type']!='image/png' && $_FILES['image']['type']!='image/jpg' && $_FILES['image']['type']!='image/jpeg' && $_FILES['image']['type']!='image/gif'){
@@ -57,10 +60,10 @@
                     }else{
                         move_uploaded_file($_FILES['image']['tmp_name'],PROJECT_IMAGE_SERVER_PATH.$image);
                     }
-                    mysqli_query($con,"update $table set heading='$heading',image='$image' where id='$id'");
+                    mysqli_query($con,"update $table set heading='$heading',content='$content',image='$image' where id='$id'");
                 }
                 else{
-                    mysqli_query($con,"update $table set heading='$heading' where id='$id'");
+                    mysqli_query($con,"update $table set heading='$heading',content='$content' where id='$id'");
                 }
     
                  
@@ -72,7 +75,7 @@
                     move_uploaded_file($_FILES['image']['tmp_name'],PROJECT_IMAGE_SERVER_PATH.$image);
                 }
                 
-                mysqli_query($con,"insert into $table(heading,image,status) values('$heading','$image','1')");
+                mysqli_query($con,"insert into $table(heading,content,image,status) values('$heading','$content','$image','1')");
             }
         //	header('location:banner.php');
         
@@ -131,6 +134,13 @@
                                     <label class="col-sm-2 col-form-label">Heading</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="" name="heading" value="<?php echo $heading?>" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Content</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="content" id="" cols="10" rows="6" class="form-control"><?php echo $content?></textarea>
                                     </div>
                                 </div>
                                

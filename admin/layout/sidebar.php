@@ -79,7 +79,7 @@
                                 </li>
                                 <li>
                                     <a href="ourproject.php">
-                                    <i class="simple-icon-grid"></i> Our Project
+                                    <i class="simple-icon-grid"></i> Our Services
                                     </a>
                                 </li>
                                 <li>
